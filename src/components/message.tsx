@@ -32,7 +32,7 @@ export function Message({ amountOfReactions, text, answered = false, id }: Messa
     async function handleUnreactMessage() {
         try {
             await unreactRoomMessage({ messageId: id, roomId: roomId || '' })
-            setHasReacted(true)
+            setHasReacted(false)
         } catch {
             toast.error('Falha ao remover a reção da pergunta')
         }

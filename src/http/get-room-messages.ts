@@ -10,7 +10,7 @@ interface MessageFromAPI {
     answered: boolean
 }
 
-interface Message {
+export interface Message {
     id: string
     roomId: string
     message: string
