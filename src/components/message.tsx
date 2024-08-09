@@ -1,5 +1,6 @@
 import { ArrowUp } from "lucide-react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 interface MessageProps {
     text: string
@@ -9,6 +10,11 @@ interface MessageProps {
 
 export function Message({ amountOfReactions, text, answered = false }: MessageProps) {
     const [hasReacted, setHasReacted] = useState(false)
+    const { roomId } = useParams()
+
+    if(!roomId) {
+        throw new Error("Message components must be used within room page")
+    }
 
     function handleReactToMessage() {
         setHasReacted(true)
