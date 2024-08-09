@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import amaLogo from '../assets/ama-logo.svg'
 import { ArrowRight, ArrowUp, Share2 } from "lucide-react"
 import { toast } from "sonner"
+import { Message } from "../components/message"
 
 export function Room() {
     const { roomId } = useParams()
@@ -59,22 +60,7 @@ export function Room() {
             </form>
 
             <ol className="list-decimal list-outside px-3 space-y-8">
-                <li className="ml-4 leading-relaxed text-zinc-100">
-                    O que é GoLang e quais são suas lirincipais vantagens em comparação com outras linguagens de programação como Python, Java ou C++?
-                    
-                    <button type="button" className="mt-3 flex items-center gap-2 text-orange-400 text-sm font-medium transition-colors hover:text-orange-500">
-                        <ArrowUp></ArrowUp>
-                        Curtir pergunta (123)
-                    </button>
-                </li>
-                <li className="ml-4 leading-relaxed text-zinc-100">
-                    O que é GoLang e quais são suas lirincipais vantagens em comparação com outras linguagens de programação como Python, Java ou C++?
-                    
-                    <button type="button" className="mt-3 flex items-center gap-2 text-zinc-400 text-sm font-medium transition-colors hover:text-zinc-500">
-                        <ArrowUp></ArrowUp>
-                        Curtir pergunta (123)
-                    </button>
-                </li>
+                <Message answered text="O que é GoLang e quais são suas lirincipais vantagens em comparação com outras linguagens de programação como Python, Java ou C++?" amountOfReactions={1}/>
             </ol>
         </div>
     )

@@ -2,6 +2,8 @@ import { ArrowRight } from 'lucide-react'
 import amaLogo from '../assets/ama-logo.svg'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { createRoom } from '../http/create-room'
+import { toast } from 'sonner'
 
 type TFormCreateRoom = {
     theme: string
@@ -20,10 +22,21 @@ export function CreateRoom() {
         })
     }
 
-    function handleCreateRoom(event: React.FormEvent<HTMLFormElement>) {
+    async function handleCreateRoom(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         const { theme } = formData
-        navigate(`/room/${theme}`)
+
+        if (!theme) {
+            toast.warning("E necessário informar um nome para a sala.")
+            return
+        }
+
+        try {
+            const result = await createRoom({ theme })  
+            navigate(`/room/${result.roomId}`)
+        } catch {
+            toast.error("Error ao criar sala. Por favor, tente novamente!")
+        }
     }
 
     return (
