@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import amaLogo from '../assets/ama-logo.svg'
 import { ArrowRight, ArrowUp, Share2 } from "lucide-react"
+import { toast } from "sonner"
 
 export function Room() {
     const { roomId } = useParams()
@@ -12,6 +13,8 @@ export function Room() {
             navigator.share({ url })
         } else {
             navigator.clipboard.writeText(url)
+
+            toast.info('The room URL was copied to your clipboard!')
         }
     }
     
