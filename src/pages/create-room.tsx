@@ -47,7 +47,10 @@ export function CreateRoom() {
                         onChange={handleChange}
                     />
 
-                    <button type='submit' className='bg-orange-400 text-orange-950 px-3 py-1.5 gap-1.5 flex items-center rounded-lg font-medium text-sm transition-colors hover:bg-orange-500'>
+                    <button
+                        type='submit' 
+                        className='bg-orange-400 text-orange-950 px-3 py-1.5 gap-1.5 flex items-center rounded-lg font-medium text-sm transition-colors hover:bg-orange-500'
+                    >
                         Criar sala
                         <ArrowRight className='size-4'/>
                     </button>
