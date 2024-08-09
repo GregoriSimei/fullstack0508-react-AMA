@@ -20,7 +20,7 @@ interface Message {
 }
 
 export async function unreactRoomMessage({ roomId, messageId }: UnReactRoomMessage): Promise<Message> {
-    const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/rooms/${roomId}/messages/${messageId}`,
+    const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/rooms/${roomId}/messages/${messageId}/react`,
         {
             method: 'DELETE'
         }

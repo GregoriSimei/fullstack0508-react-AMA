@@ -21,7 +21,7 @@ interface Message {
 
 
 export async function reactRoomMessage({ roomId, messageId }: ReactRoomMessage): Promise<Message> {
-    const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/rooms/${roomId}/messages/${messageId}`,
+    const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/rooms/${roomId}/messages/${messageId}/react`,
         {
             method: 'PATCH'
         }

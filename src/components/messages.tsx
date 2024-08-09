@@ -25,6 +25,7 @@ export function Messages() {
                     return (
                         <Message
                             key={id}
+                            id={id}
                             answered={answered}
                             text={message}
                             amountOfReactions={reactionCount}

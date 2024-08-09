@@ -1,14 +1,18 @@
 import { ArrowUp } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { reactRoomMessage } from "../http/react-room-message";
+import { toast } from "sonner";
+import { unreactRoomMessage } from "../http/unreact-room-message";
 
 interface MessageProps {
     text: string
     amountOfReactions: number
     answered?: boolean
+    id: string
 }
 
-export function Message({ amountOfReactions, text, answered = false }: MessageProps) {
+export function Message({ amountOfReactions, text, answered = false, id }: MessageProps) {
     const [hasReacted, setHasReacted] = useState(false)
     const { roomId } = useParams()
 
@@ -16,8 +20,22 @@ export function Message({ amountOfReactions, text, answered = false }: MessagePr
         throw new Error("Message components must be used within room page")
     }
 
-    function handleReactToMessage() {
-        setHasReacted(true)
+    async function handleReactMessage() {
+        try {
+            await reactRoomMessage({ messageId: id, roomId: roomId || '' })
+            setHasReacted(true)
+        } catch {
+            toast.error('Falha ao reagir a pergunta')
+        }
+    }
+
+    async function handleUnreactMessage() {
+        try {
+            await unreactRoomMessage({ messageId: id, roomId: roomId || '' })
+            setHasReacted(true)
+        } catch {
+            toast.error('Falha ao remover a reção da pergunta')
+        }
     }
 
     return (
@@ -26,12 +44,12 @@ export function Message({ amountOfReactions, text, answered = false }: MessagePr
             
             {
                 hasReacted ? (
-                    <button type="button" className="mt-3 flex items-center gap-2 text-orange-400 text-sm font-medium transition-colors hover:text-orange-500">
+                    <button onClick={handleUnreactMessage} type="button" className="mt-3 flex items-center gap-2 text-orange-400 text-sm font-medium transition-colors hover:text-orange-500">
                         <ArrowUp></ArrowUp>
                         Curtir pergunta ({amountOfReactions})
                     </button>
                 ) : (
-                    <button onClick={handleReactToMessage} type="button" className="mt-3 flex items-center gap-2 text-zinc-400 text-sm font-medium transition-colors hover:text-zinc-500">
+                    <button onClick={handleReactMessage} type="button" className="mt-3 flex items-center gap-2 text-zinc-400 text-sm font-medium transition-colors hover:text-zinc-500">
                         <ArrowUp></ArrowUp>
                         Curtir pergunta ({amountOfReactions})
                     </button>
